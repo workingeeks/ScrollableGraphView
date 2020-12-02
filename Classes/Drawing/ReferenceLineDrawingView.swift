@@ -85,8 +85,20 @@ internal class ReferenceLineDrawingView : UIView {
             
             let numberFormatter = referenceNumberFormatter()
             
-            let maxString = numberFormatter.string(from: self.currentRange.max as NSNumber)! + units
-            let minString = numberFormatter.string(from: self.currentRange.min as NSNumber)! + units
+            var maxString = numberFormatter.string(from: self.currentRange.max as NSNumber)!
+            if self.unitsAligment == .left {
+                maxString = self.units + maxString
+            } else {
+                maxString += self.units
+            }
+
+            var minString = numberFormatter.string(from: self.currentRange.min as NSNumber)!
+
+            if self.unitsAligment == .left {
+                minString = self.units + maxString
+            } else {
+                minString += self.units
+            }
             
             addLine(withTag: maxString, from: maxLineStart, to: maxLineEnd, in: referenceLinePath)
             addLine(withTag: minString, from: minLineStart, to: minLineEnd, in: referenceLinePath)
