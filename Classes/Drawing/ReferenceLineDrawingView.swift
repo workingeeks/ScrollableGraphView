@@ -95,7 +95,7 @@ internal class ReferenceLineDrawingView : UIView {
             var minString = numberFormatter.string(from: self.currentRange.min as NSNumber)!
 
             if self.unitsAligment == .left {
-                minString = self.units + maxString
+                minString = self.units + minString
             } else {
                 minString += self.units
             }
