@@ -16,6 +16,9 @@ internal class ReferenceLineDrawingView : UIView {
     private var currentRange: (min: Double, max: Double) = (0,100)
     private var topMargin: CGFloat = 10
     private var bottomMargin: CGFloat = 10
+    private var unitsAligment: UnitsAligment {
+        return self.settings.unitsAligment
+    }
     
     private var lineWidth: CGFloat {
         get {
@@ -26,7 +29,7 @@ internal class ReferenceLineDrawingView : UIView {
     private var units: String {
         get {
             if let units = self.settings.referenceLineUnits {
-                return " \(units)"
+                return "\(units)"
             } else {
                 return ""
             }
@@ -157,7 +160,11 @@ internal class ReferenceLineDrawingView : UIView {
             var valueString = numberFormatter.string(from: value as NSNumber)!
             
             if(self.settings.shouldAddUnitsToIntermediateReferenceLineLabels) {
-                valueString += " \(units)"
+                if self.unitsAligment == .right {
+                    valueString += "\(self.units)"
+                } else {
+                    valueString = "\(self.units) \(valueString)"
+                }
             }
             
             addLine(withTag: valueString, from: lineStart, to: lineEnd, in: path)
