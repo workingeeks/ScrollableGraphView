@@ -175,7 +175,7 @@ internal class ReferenceLineDrawingView : UIView {
                 if self.unitsAligment == .right {
                     valueString += "\(self.units)"
                 } else {
-                    valueString = "\(self.units) \(valueString)"
+                    valueString = "\(self.units)\(valueString)"
                 }
             }
             
